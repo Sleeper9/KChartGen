@@ -19,21 +19,21 @@ input[type=range].vertical {
 <script type="text/javascript" src="kchartgen-demo.js"></script>
 <script type="text/javascript">
 	$(function(){
-		function getUrlParameter(sParam) {
+		function getUrlParameter(sParam, raw) {
 		    var sPageURL = window.location.search.substring(1);
 		    var sURLVariables = sPageURL.split('&');
 		    for (var i = 0; i < sURLVariables.length; i++) {
 				var sParameterName = sURLVariables[i].split('=');
 					if (sParameterName[0] == sParam) {
-						return unescape(sParameterName[1]);
+						return raw ? sParameterName[1] : decodeURIComponent(sParameterName[1]);
 				}
 		    }
 		}
 
 // 		KChartGen.init('#svg');
 		var data;
-		if(data = getUrlParameter('data')){
-			var jsonData = JSON.parse(B64.decode(data));
+		if(data = getUrlParameter('data', true)){
+			var jsonData = JSON.parse(B64.decode(unescape(data)));
 			KChartGen.init('#svg');	
 			KChartGen.build(jsonData);
 			$('#controls').hide();
@@ -57,10 +57,21 @@ input[type=range].vertical {
 					color: getUrlParameter('colorB') || KChartGen.DemoData.SERIES_B_COLOR,
 					label: getUrlParameter('labelB') || KChartGen.DemoData.SERIES_B_LABEL,
 					end: {
-						y: 0.2 || getUrlParameter('endB')
+						y: 1 || getUrlParameter('endB')
 					}
 				}
 			}
+			
+			$('#titleText').val(queryData.title);
+			$('#xAxisLabelPos').val(queryData.xAxis.splitPosition);
+			$('#xAxisLabelText').val(queryData.xAxis.splitLabel);
+			$('#seriesAColor').val(queryData.seriesA.color);
+			$('#seriesALabelText').val(queryData.seriesA.label);
+			$('#seriesABegin').val(queryData.seriesA.begin.y);
+			$('#seriesBColor').val(queryData.seriesB.color);
+			$('#seriesBLabelText').val(queryData.seriesB.label);
+			$('#seriesBEnd').val(queryData.seriesB.end.y);
+			
 			KChartGen.init('#svg');
 			KChartGen.build(queryData);
 		} else {
