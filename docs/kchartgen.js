@@ -223,7 +223,7 @@ var KChartGen;
 	}
 	
 	KChartGen.setXAxisLabelText = function(label){
-		xAxis['2'].attr({text : label});
+		xAxis['1'].attr({text : label});
 	};
 	
 	KChartGen.setXAxisLabelPos = function(pos){
