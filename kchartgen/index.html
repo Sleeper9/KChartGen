@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+input[type=range].vertical {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 200px;
+    padding: 0 5px;
+}
+</style>
+<script type="text/javascript" src="../javascript/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../javascript/snap.svg-min.js"></script>
+<script type="text/javascript" src="../javascript/kchartgen.js"></script>
+<script type="text/javascript" src="../javascript/kchartgen-demo.js"></script>
+<script type="text/javascript">
+	$(function(){
+// 		KChartGen.init('#svg');
+		KChartGen.demo('#svg');
+		KChartGen.updateSvgLink($('#export'));
+
+		$('#titleText').change(function(){
+			KChartGen.setTitle($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		$('#xAxisLabelPos').change(function(){
+			KChartGen.setXAxisLabelPos($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		$('#xAxisLabelText').change(function(){
+			KChartGen.setXAxisLabelText($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		
+		$('#seriesAColor').change(function(){
+			KChartGen.setSeriesAColor($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		$('#seriesALabelText').change(function(){
+			KChartGen.setSeriesALegendText($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		$('#seriesABegin').change(function(){
+			KChartGen.setSeriesABegin($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		
+		$('#seriesBColor').change(function(){
+			KChartGen.setSeriesBColor($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		$('#seriesBLabelText').change(function(){
+			KChartGen.setSeriesBLegendText($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		$('#seriesBEnd').change(function(){
+			KChartGen.setSeriesBEnd($(this).val());
+			KChartGen.updateSvgLink($('#export'));
+		});
+		
+	})
+</script>
+</head>
+<body>
+	<svg id="svg" width="600" height="400"></svg>
+	<div>
+		<div style="clear:both;margin: 20px 0">
+			<div>
+				<label for="titleText">Title:</label> <input id="titleText" type="text" name="titleText" value="A SZEGEDI EMBEREK SZEMÉLYES ÉLETMINŐSÉGE" placeholder="Type something..." style="width: 400px">
+			</div>
+			<div>
+				<label for="xAxisLabelText">X axis label text:</label> <input id="xAxisLabelText" type="text" name="xAxisLabelText" value="2014" placeholder="Type something...">
+				<label for="xAxisLabelPos">X axis label position:</label> <input id="xAxisLabelPos" type="range" name="xAxisLabelPos" value="0.70" min="0" max="1" step="0.01">
+			</div>
+		</div>
+		
+		<div style="clear:both;margin: 10px 0;">
+			<a id="export" href-lang="image/svg+xml" download="chart.svg">Download as SVG</a>
+		</div>
+		
+		<div style="float:left">
+			<fieldset>
+				<legend>Series A</legend>
+				<div>
+					<label for="seriesAColor">Pick a color:</label> <input id="seriesAColor" type="color" name="seriesAColor" value="#ff0000">
+				</div>
+				<div>
+					<label for="seriesALabelText">Text:</label> <input id="seriesALabelText" type="text" name="seriesALabelText" value="Botka László" placeholder="Type something...">
+				</div>
+				<div>
+					<label for="seriesABegin">Start at:</label> <input id="seriesABegin" type="range" name="seriesABegin" value="0.3" min="0" max="1" step="0.01" class="vertical" orient="vertical">
+				</div>
+			</fieldset>
+		</div>
+		<div style="float:left">
+			<fieldset>
+				<legend>Series B</legend>
+				<div>
+					<label for="seriesBColor">Pick a color:</label> <input id="seriesBColor" type="color" name="seriesBColor" value="#E5E284">
+				</div>
+				<div>
+					<label for="seriesBLabelText">Text:</label> <input id="seriesBLabelText" type="text" name="seriesBLabelText" value="Kothencz János" placeholder="Type something...">
+				</div>
+				<div>
+					<label for="seriesBEnd">Start at:</label> <input id="seriesBEnd" type="range" name="seriesBEnd" value="1" min="0" max="1" step="0.01" class="vertical" orient="vertical">
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</body>
+</html>
