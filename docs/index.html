@@ -22,13 +22,11 @@ input[type=range].vertical {
 		function getUrlParameter(sParam) {
 		    var sPageURL = window.location.search.substring(1);
 		    var sURLVariables = sPageURL.split('&');
-		    for (var i = 0; i < sURLVariables.length; i++) 
-		    {
-			var sParameterName = sURLVariables[i].split('=');
-			if (sParameterName[0] == sParam) 
-			{
-			    return sParameterName[1];
-			}
+		    for (var i = 0; i < sURLVariables.length; i++) {
+				var sParameterName = sURLVariables[i].split('=');
+					if (sParameterName[0] == sParam) {
+						return sParameterName[1];
+				}
 		    }
 		}
 
@@ -39,9 +37,36 @@ input[type=range].vertical {
 			KChartGen.init('#svg');	
 			KChartGen.build(jsonData);
 			$('#controls').hide();
+		} else if(getUrlParameter('title')){
+			var queryData = {
+				title: getUrlParameter('title') || KChartGen.DemoData.TITLE,
+				xAxis: {
+					splitLabel: getUrlParameter('splitLabel') || KChartGen.DemoData.XAXIS_SPLITLABEL,
+					splitPosition: getUrlParameter('splitPosition') || KChartGen.DemoData.XAXIS_SPLITPOS
+				},
+				seriesA: {
+					fontSize: 12 || getUrlParameter('fontSizeA'),
+					color: getUrlParameter('colorA') || KChartGen.DemoData.SERIES_A_COLOR,
+					label: getUrlParameter('labelA') || KChartGen.DemoData.SERIES_A_LABEL,
+					begin: {
+						y: 0.2 || getUrlParameter('beginA')
+					}
+				},
+				seriesB: {
+					fontSize: 12 || getUrlParameter('fontSizeB'),
+					color: getUrlParameter('colorB') || KChartGen.DemoData.SERIES_B_COLOR,
+					label: getUrlParameter('labelB') || KChartGen.DemoData.SERIES_B_LABEL,
+					end: {
+						y: 0.2 || getUrlParameter('endB')
+					}
+				}
+			}
+			KChartGen.init('#svg');
+			KChartGen.build(queryData);
 		} else {
-			KChartGen.demo('#svg');	
+			KChartGen.demo('#svg');
 		}
+			
 		KChartGen.updateSvgLink($('#export'));
 
 		$('#titleText').change(function(){
