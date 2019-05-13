@@ -18,8 +18,29 @@ input[type=range].vertical {
 <script type="text/javascript" src="https://raw.githubusercontent.com/Sleeper9/KChartGen/master/kchartgen/src/main/javascript/kchartgen-demo.js"></script>
 <script type="text/javascript">
 	$(function(){
+		function getUrlParameter(sParam) {
+		    var sPageURL = window.location.search.substring(1);
+		    var sURLVariables = sPageURL.split('&');
+		    for (var i = 0; i < sURLVariables.length; i++) 
+		    {
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam) 
+			{
+			    return sParameterName[1];
+			}
+		    }
+		}
+
 // 		KChartGen.init('#svg');
-		KChartGen.demo('#svg');
+		var data;
+		if(data = getUrlParameter('data')){
+			var jsonData = JSON.parse(B64.decode(unescape(data)));
+			KChartGen.init('#svg');	
+			KChartGen.build(jsonData);
+			$('#controls').hide();
+		} else {
+			KChartGen.demo('#svg');	
+		}
 		KChartGen.updateSvgLink($('#export'));
 
 		$('#titleText').change(function(){
@@ -66,7 +87,7 @@ input[type=range].vertical {
 </head>
 <body>
 	<svg id="svg" width="600" height="400"></svg>
-	<div>
+	<div id="controls">
 		<div style="clear:both;margin: 20px 0">
 			<div>
 				<label for="titleText">Title:</label> <input id="titleText" type="text" name="titleText" value="A SZEGEDI EMBEREK SZEMÉLYES ÉLETMINŐSÉGE" placeholder="Type something..." style="width: 400px">
@@ -78,7 +99,7 @@ input[type=range].vertical {
 		</div>
 		
 		<div style="clear:both;margin: 10px 0;">
-			<a id="export" href-lang="image/svg+xml" download="chart.svg">Download as SVG</a>
+			<a id="export" href-lang="image/svg+xml" download="chart.svg" href="#">Download as SVG</a>
 		</div>
 		
 		<div style="float:left">
