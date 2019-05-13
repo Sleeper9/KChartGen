@@ -250,9 +250,10 @@ var KChartGen;
 	};
 	
 	KChartGen.updateSvgLink = function($link){
-		return btoa(unescape(encodeURIComponent(snap.toString())));
+		var data = btoa(unescape(encodeURIComponent(snap.toString())));
 		 // Works in Firefox 3.6 and Webit and possibly any browser which supports the data-uri
-		$link.attr('href', 'data:image/svg+xml;base64,\n'+data);
+		$link.attr('href', 'data:image/svg+xml;base64,\n' + data);
+		return data;
 	};
 	
 })(KChartGen = KChartGen || {});
