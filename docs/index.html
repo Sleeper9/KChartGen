@@ -25,7 +25,7 @@ input[type=range].vertical {
 		    for (var i = 0; i < sURLVariables.length; i++) {
 				var sParameterName = sURLVariables[i].split('=');
 					if (sParameterName[0] == sParam) {
-						return sParameterName[1];
+						return unescape(sParameterName[1]);
 				}
 		    }
 		}
@@ -33,11 +33,11 @@ input[type=range].vertical {
 // 		KChartGen.init('#svg');
 		var data;
 		if(data = getUrlParameter('data')){
-			var jsonData = JSON.parse(B64.decode(unescape(data)));
+			var jsonData = JSON.parse(B64.decode(data));
 			KChartGen.init('#svg');	
 			KChartGen.build(jsonData);
 			$('#controls').hide();
-		} else if(getUrlParameter('title')){
+		} else if(data = getUrlParameter('title')){
 			var queryData = {
 				title: getUrlParameter('title') || KChartGen.DemoData.TITLE,
 				xAxis: {
@@ -53,7 +53,7 @@ input[type=range].vertical {
 					}
 				},
 				seriesB: {
-					fontSize: 12 || getUrlParameter('fontSizeB'),
+					fontSize: 14 || getUrlParameter('fontSizeB'),
 					color: getUrlParameter('colorB') || KChartGen.DemoData.SERIES_B_COLOR,
 					label: getUrlParameter('labelB') || KChartGen.DemoData.SERIES_B_LABEL,
 					end: {
